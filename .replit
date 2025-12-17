@@ -1,0 +1,52 @@
+modules = ["nodejs-20"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["chromium"]
+
+[userenv]
+
+[userenv.shared]
+PORT = "5000"
+NODE_ENV = "production"
+BOT_NAME = "HAMO_BOT"
+BOT_VERSION = "3.0.0"
+YEAR = "2025"
+DEVELOPER = "HAMO"
+WHATSAPP_SESSION_PATH = "./.wwebjs_auth"
+CLIENT_ID = "hamo-bot-2025"
+LOG_LEVEL = "info"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "WhatsApp Bot"
+
+[[workflows.workflow]]
+name = "WhatsApp Bot"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node index.js"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "vm"
+run = ["node", "index.js"]

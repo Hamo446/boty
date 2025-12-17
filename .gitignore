@@ -1,0 +1,8 @@
+node_modules/
+.wwebjs_auth/
+.wwebjs_cache/
+last_qr.txt
+*.log
+.env
+environment.env
+.DS_Store
